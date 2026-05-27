@@ -1,4 +1,4 @@
-name: Deploy Docs
+name: Deploy Docs to GitHub Pages
 
 on:
   push:
@@ -6,48 +6,44 @@ on:
       - main
   workflow_dispatch:
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -H "${{ secrets.SERVER_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
 
-      - name: Rsync source to server
-        run: |
-          rsync -az --delete \
-            --exclude='.git' \
-            --exclude='node_modules' \
-            --exclude='build' \
-            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
-            ./ "${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/var/www/woveleap-docs/"
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Build on server
-        run: |
-          ssh -i ~/.ssh/deploy_key -T -o StrictHostKeyChecking=no \
-            "${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}" << 'ENDSSH'
-          set -e
-          cd /var/www/woveleap-docs
-          npm ci
-          npm run build
-          ENDSSH
+      - name: Build Docusaurus
+        run: npm run build
 
-      - name: Install nginx config (first time only if not present)
-        run: |
-          ssh -i ~/.ssh/deploy_key -T -o StrictHostKeyChecking=no \
-            "${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}" << 'ENDSSH'
-          set -e
-          CONF=/etc/nginx/sites-available/help.woveleap.com
-          if [ ! -f "$CONF" ]; then
-            sudo cp /var/www/woveleap-docs/nginx/help.woveleap.com.conf "$CONF"
-            sudo ln -sf "$CONF" /etc/nginx/sites-enabled/
-            sudo nginx -t && sudo systemctl reload nginx
-          fi
-          ENDSSH
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
