@@ -1,0 +1,53 @@
+---
+id: troubleshooting
+title: Troubleshooting
+sidebar_label: Troubleshooting
+---
+
+## Login issues
+
+### 'Invalid username or password'
+- Check that Caps Lock is off
+- Remember your username is not your email (it's a short ID like `john.smith`)
+- Use **Forgot Password** to reset if needed
+- Contact your admin if you are locked out
+
+### 'Your account has been deactivated'
+Your admin has deactivated your account. Contact them to reactivate it.
+
+### 2FA code not working
+- Ensure your device's clock is set to automatic / network time — authenticator apps rely on exact time sync
+- Wait for the next 30-second cycle and try the new code
+- If the problem persists, your admin can disable 2FA on your account so you can log in and re-enrol
+
+### SSO popup blocked
+Allow popups for `app.woveleap.com` in your browser:
+- **Chrome:** click the popup-blocked icon in the address bar → Allow
+- **Safari:** Preferences → Websites → Pop-up Windows → Allow for this site
+- **Firefox:** click Options in the blocked popup bar → Allow popups
+
+---
+
+## Commission issues
+
+### Commission not calculated after approval
+The partner or sales person may not have a contract assigned. Go to their profile in User Management and assign the relevant contract, then re-approve the sale.
+
+### Wrong currency shown
+Check the user's **Payout Currency** setting in their profile. If it's incorrect, update it — subsequent commissions will use the correct currency.
+
+---
+
+## Email issues
+
+### Users not receiving invite or notification emails
+Go to **Settings → Email Settings** and verify your SMTP configuration. Click **Send Test Email** — if it fails, check your SMTP credentials, host, and port. Ensure port 587 (or 465 for SSL) is not blocked by your server firewall.
+
+### Password reset link not working
+Reset links expire after 1 hour. Ask the user to request a new reset link.
+
+---
+
+## Still need help?
+
+Contact WoveLeap support at **support@woveleap.com** with a description of the issue, your organisation name, and any error messages you see.

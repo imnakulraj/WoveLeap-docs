@@ -1,0 +1,50 @@
+---
+id: org-setup
+title: Organisation Setup
+sidebar_label: Org Setup
+---
+
+## Accessing org setup
+
+Go to **Settings → Organisation Setup** in the sidebar. This is where all organisation-level configuration lives.
+
+## Company details
+
+- **Organisation name** — displayed across the app and on PDFs
+- **Address** — used on invoices and payout statements
+- **Currency** — your organisation's base currency (affects all deal values and commission calculations)
+- **Logo** — upload your company logo for branded PDFs and emails
+
+## Tax & compliance (India)
+
+If your organisation is based in India:
+
+| Field | Description |
+|---|---|
+| GSTIN | Your GST registration number |
+| PAN | Organisation PAN |
+| GST Registration type | Regular / Composition / Unregistered |
+| State | Your registered state (determines CGST+SGST vs IGST) |
+| TDS settings | Whether to deduct TDS on partner / sales person payouts |
+
+## Number series
+
+Configure invoice and payout statement numbering formats:
+- Prefix (e.g. `INV-`, `PAY-`)
+- Starting number
+- Financial year reset (auto-resets to 001 each April 1 for India)
+
+Go to **Settings → Number Series** to configure.
+
+## Email / SMTP
+
+WoveLeap can send transactional emails via:
+- Your own SMTP server
+- SendGrid
+- Amazon SES
+
+Go to **Settings → Email Settings** and enter your SMTP credentials. Send a test email to verify.
+
+## Multi-currency
+
+If your organisation works with partners in multiple countries, enable multi-currency support under **Settings → Currency**. Exchange rates are fetched automatically and can be manually overridden.
