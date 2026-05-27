@@ -1,0 +1,82 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "WoveLeap Help Center",
+  "logo": {
+    "light": "/images/logo-light.png",
+    "dark": "/images/logo-dark.png"
+  },
+  "favicon": "/images/favicon.png",
+  "colors": {
+    "primary": "#6366f1",
+    "light": "#818cf8",
+    "dark": "#4f46e5"
+  },
+  "topbarLinks": [
+    {
+      "name": "Go to App",
+      "url": "https://app.woveleap.com"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Log In",
+    "url": "https://app.woveleap.com"
+  },
+  "tabs": [],
+  "anchors": [],
+  "navigation": [
+    {
+      "group": "Overview",
+      "pages": [
+        "introduction",
+        "getting-started/logging-in",
+        "getting-started/sso",
+        "getting-started/navigation",
+        "getting-started/roles"
+      ]
+    },
+    {
+      "group": "For Partners",
+      "pages": [
+        "partners/overview",
+        "partners/submitting-a-sale",
+        "partners/tracking-commissions",
+        "partners/payout-statements",
+        "partners/bank-details"
+      ]
+    },
+    {
+      "group": "For Sales Persons",
+      "pages": [
+        "sales/overview",
+        "sales/submitting-a-sale",
+        "sales/tracking-commissions",
+        "sales/payout-history"
+      ]
+    },
+    {
+      "group": "For Admins",
+      "pages": [
+        "admins/overview",
+        "admins/inviting-users",
+        "admins/managing-partners",
+        "admins/contracts-and-tiers",
+        "admins/approving-sales",
+        "admins/managing-payouts",
+        "admins/disputes",
+        "admins/reports",
+        "admins/org-setup",
+        "admins/subscription"
+      ]
+    },
+    {
+      "group": "Help",
+      "pages": [
+        "faq",
+        "troubleshooting"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "website": "https://woveleap.com"
+  }
+}
